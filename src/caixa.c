@@ -46,6 +46,22 @@ void exibeCaixa(Caixa* caixa) {
   }
 }
 
+void imprimeCx(Caixa *caixa){
+  Bola *aux=caixa->primeira;
+  while(aux!=NULL){
+    print(aux->cor); printf(" %c ", aux->letra);
+    aux=aux->prox;
+  }
+}
+
+void imprimeCxant(Caixa *caixa){
+  if(caixa->ant==NULL) imprimeCx(caixa);
+  if(caixa->ant!=NULL){
+    imprimeCxant(caixa->ant);
+    imprimeCx(caixa);
+  }
+}
+
 void ligaCaixa(Caixa** C1, Caixa* nova){
   if(caixaVazia(*C1)) *C1 = nova;
   else if((*C1)->bolas > nova->bolas){

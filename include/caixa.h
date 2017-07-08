@@ -31,6 +31,10 @@ void insereNaCaixa(Caixa* caixa, Bola* bola);
 
 void exibeCaixa(Caixa* caixa);
 
+void imprimeCx(Caixa *caixa);
+
+void imprimeCxant(Caixa *caixa);
+
 void ligaCaixa(Caixa** C1, Caixa* nova);
 
 #endif
