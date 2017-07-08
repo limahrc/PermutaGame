@@ -35,8 +35,8 @@ int main(int argc, char const *argv[]) {
   insereNaCaixa(C2, novaBola("Laranja", 'B'));
   insereNaCaixa(C2, novaBola("Laranja", 'Y'));
 
-  ligaCaixa2(&C1, C2);
-  ligaCaixa2(&C1, aux);
+  ligaCaixa(&C1, C2);
+  ligaCaixa(&C1, aux);
 
 
   exibeCaixa(C1);
