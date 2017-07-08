@@ -1,5 +1,32 @@
 #include "caixa.h"
 
+void troca(char *x, char *y){
+  char temp;
+  temp = *x;
+  *x = *y;
+  *y = temp;
+}
+
+void permuta(Caixa *caixa, Bola *init){
+  if(init==caixa->ultima){
+    if(caixa->prox!=NULL)
+      permuta(caixa->prox,caixa->prox->primeira);
+    else{
+      imprimeCxant(caixa);
+      printf("\n");
+    }
+  }
+  else{
+    Bola *aux=init;
+    while(aux!=NULL){
+      troca(&(init->letra), &(aux->letra));
+      permuta(caixa,init->prox);
+      troca(&(init->letra), &(aux->letra));
+      aux=aux->prox;
+    }
+  }
+}
+
 int main(int argc, char const *argv[]) {
   Caixa* C1 = NULL;
   Caixa* aux = NULL;
