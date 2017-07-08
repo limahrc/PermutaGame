@@ -28,24 +28,6 @@ void insereNaCaixa(Caixa* caixa, Bola* bola){
   }
 }
 
-void ligaCaixa(Caixa* primeira, Caixa* nova) {
-  Caixa* aux = primeira;
-  if(caixaVazia(primeira)){
-    primeira = nova;
-    nova->ant = nova->prox = NULL;
-  } else {
-    while (aux != NULL) {
-      if (aux->prox->bolas > aux->bolas) {
-        nova->prox = aux->prox;
-        nova->prox->ant = nova;
-        nova->ant = aux;
-        aux->prox = nova;
-      }
-      aux = aux->prox;
-    }
-  }
-}
-
 void exibeCaixa(Caixa* caixa) {
   if(caixaVazia(caixa)) printf("Caixa vazia.\n");
   else{
@@ -61,5 +43,26 @@ void exibeCaixa(Caixa* caixa) {
       caux = caux->prox;
       i++;
     }
+  }
+}
+
+void ligaCaixa(Caixa** C1, Caixa* nova){
+  if(caixaVazia(*C1)) *C1 = nova;
+  else if((*C1)->bolas > nova->bolas){
+    nova->prox = *C1;
+    (*C1)->ant = nova;
+    *C1 = nova;
+  }
+  else{
+    Caixa* aux = *C1;
+    while (aux->prox != NULL) {
+      if(aux->prox->bolas > nova->bolas){
+        nova->prox = aux->prox;
+        nova->prox->ant = nova;
+        nova->ant = aux;
+      }
+      aux = aux->prox;
+    }
+    aux->prox = nova;
   }
 }

@@ -31,6 +31,6 @@ void insereNaCaixa(Caixa* caixa, Bola* bola);
 
 void exibeCaixa(Caixa* caixa);
 
-void ligaCaixa(Caixa* primeira, Caixa* nova);
+void ligaCaixa(Caixa** C1, Caixa* nova);
 
 #endif
