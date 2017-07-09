@@ -4,7 +4,7 @@
 Bola* novaBola(char cor[], char letra){
   Bola* nova = (Bola*) calloc(1, sizeof(Bola));
   nova->cor = newString(cor);
-  nova->letra = letra;
+  nova->letra = letra; 
   return nova;
 }
 
@@ -15,7 +15,7 @@ Caixa* novaCaixa(int nBolas){
 }
 
 bool caixaVazia(Caixa* caixa){
-  if(caixa == NULL || (caixa->primeira == NULL && caixa->ultima == NULL))
+  if(caixa == NULL || (caixa->primeira == NULL && caixa->ultima == NULL)) //nao entendi esse "ou"
   return true;
   else return false;
 }
@@ -24,7 +24,7 @@ void insereNaCaixa(Caixa* caixa, Bola* bola){
   if(caixaVazia(caixa)) caixa->primeira = caixa->ultima = bola;
   else{
     caixa->ultima->prox = bola;
-    caixa->ultima = caixa->ultima->prox;
+    caixa->ultima = caixa->ultima->prox; //caixa->ultima->prox poderia ser modificada para bola 
   }
 }
 
@@ -62,23 +62,26 @@ void imprimeCxant(Caixa *caixa){
   }
 }
 
-void ligaCaixa(Caixa** C1, Caixa* nova){
-  if(caixaVazia(*C1)) *C1 = nova;
-  else if((*C1)->bolas > nova->bolas){
-    nova->prox = *C1;
-    (*C1)->ant = nova;
-    *C1 = nova;
-  }
-  else{
-    Caixa* aux = *C1;
-    while (aux->prox != NULL) {
-      if(aux->prox->bolas > nova->bolas){
-        nova->prox = aux->prox;
-        nova->prox->ant = nova;
-        nova->ant = aux;
+Caixa *ligaCaixa(Caixa* primeira, Caixa* nova) {
+  if(primeira==NULL){
+    nova->ant = nova->prox = NULL;
+    return nova;
+  }else {
+    Caixa *ant = NULL; 
+    Caixa *aux = primeira;
+    while (aux != NULL) {
+      if (nova->bolas < aux->bolas) break;
+      else{
+        ant=aux;
+        aux = aux->prox;
       }
-      aux = aux->prox;
     }
-    aux->prox = nova;
+    if(ant!=NULL) ant->prox=nova;
+    else primeira=nova;
+    nova->ant=ant;
+    nova->prox=aux;
+    if(aux!=NULL) aux->ant=nova;
+
+    return primeira;
   }
 }
