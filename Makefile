@@ -8,10 +8,10 @@ all: app
 
 %.o: $(SRC)/%.c
 	@gcc -c -I $(INCLUDE) $< -o $(OBJ)/$@
-	@echo ':: arquivo objeto gerado:' $@ 
+	@echo ':: arquivo objeto gerado:' $@
 
 app: caixa.o main.o
-	gcc $(OBJ)/*.o -lhrc -o $(APP)/exe
+	gcc $(OBJ)/*.o ./lib/str.a -o $(APP)/exe
 	echo ':: executável gerado'
 
 run:
