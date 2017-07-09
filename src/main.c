@@ -5,12 +5,14 @@ void permuta(Caixa *caixa, Bola *init);
 int fatorial(int n);
 
 int main() {
+    char sair;
 
-  Caixa *S = NULL, *aux = NULL;
-  int i, j, possib=0, cxs, bol;
-  char ltr, opt, sair, cor[20];
+    Caixa *S = NULL, *aux = NULL;
+    int i, j, possib=1, cxs=0, bol=0;
+    char ltr, opt, cor[20];
 
     do{
+
       system("clear");
       printf(":::::::::\tPERMUTA GAME\t:::::::::\n");
       printf("Quantas caixas serão? "); scanf("%i", &cxs);
@@ -20,7 +22,7 @@ int main() {
           scanf("%s", cor);
 
           printf("Quantas bolas serão? "); scanf("%i", &bol);
-          possib+=bol; //Soma do número de bolas
+          possib*=fatorial(bol); //Obtendo número de possibilidades
           aux = novaCaixa(bol);
 
           for (j=0; j<bol; j++){
@@ -32,14 +34,20 @@ int main() {
           ligaCaixa(&S, aux); //Faz o encadeamento ordenado das caixas
       }
       printf("\nExistem %i possibilidades de resultados para este jogo.\n",
-       fatorial(possib));
+      possib);
+
+      Caixa* aux2 = S;
+      while (aux2!=NULL) {
+        printf("%i ", aux2->bolas);
+        aux2 = aux2->prox;
+      }
 
       do{
         printf("Deseja exibir todas as permutações? (s/n) "); getchar();
         scanf("%c", &opt);
         if(opt == 's' || opt == 'S'){
           printf("\n");
-          permuta(S, aux->primeira);
+          permuta(S, S->primeira);
           break;
         }
         else if(opt == 'n' || opt == 'N') {
@@ -52,7 +60,11 @@ int main() {
     printf("\nDeseja jogar novamente? (s/n) "); getchar();
     scanf("%c", &sair);
 
-    if(sair == 's' || sair == 'S');
+    if(sair == 's' || sair == 'S'){
+      S = aux = NULL;
+       i = j = bol = cxs = 0;
+       possib = 1;
+    }
     else if(sair == 'n' || sair == 'N') break;
     else printf("\nOpção inválida. Tente novamente. ");
   } while(sair);

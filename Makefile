@@ -4,13 +4,15 @@ OBJ 	= ./obj
 SRC 	= ./src
 
 all: app
-
+	echo ':: pronto para executar'
 
 %.o: $(SRC)/%.c
-	gcc -c -I $(INCLUDE) $< -o $(OBJ)/$@
+	@gcc -c -I $(INCLUDE) $< -o $(OBJ)/$@
+	@echo ':: arquivo objeto gerado:' $@ 
 
 app: caixa.o main.o
 	gcc $(OBJ)/*.o -lhrc -o $(APP)/exe
+	echo ':: executável gerado'
 
 run:
 	$(APP)/exe
@@ -18,3 +20,6 @@ run:
 clean:
 	rm $(OBJ)/*.o
 	rm $(APP)/exe
+	echo ':: limpeza concluída'
+
+.SILENT: all app run clean
