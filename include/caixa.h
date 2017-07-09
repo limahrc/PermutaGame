@@ -35,6 +35,6 @@ void imprimeCx(Caixa *caixa);
 
 void imprimeCxant(Caixa *caixa);
 
-void ligaCaixa(Caixa** C1, Caixa* nova);
+Caixa *ligaCaixa(Caixa* C1, Caixa* nova);
 
 #endif

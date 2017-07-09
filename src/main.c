@@ -7,7 +7,7 @@ int fatorial(int n);
 int main() {
 
   Caixa *S = NULL, *aux = NULL;
-  int i, j, possib=0, cxs, bol;
+  int i, j, possib=1, cxs, bol;
   char ltr, opt, sair, cor[20];
 
     do{
@@ -20,7 +20,7 @@ int main() {
           scanf("%s", cor);
 
           printf("Quantas bolas serão? "); scanf("%i", &bol);
-          possib+=bol; //Soma do número de bolas
+          possib=fatorial(bol)*possib; //Calcula o numero de possibilidades
           aux = novaCaixa(bol);
 
           for (j=0; j<bol; j++){
@@ -29,17 +29,23 @@ int main() {
             insereNaCaixa(aux, novaBola(cor, ltr));
           }
 
-          ligaCaixa(&S, aux); //Faz o encadeamento ordenado das caixas
+          S=ligaCaixa(S, aux); //Faz o encadeamento ordenado das caixas
       }
-      printf("\nExistem %i possibilidades de resultados para este jogo.\n",
-       fatorial(possib));
+      printf("\nExistem %i possibilidades de resultados para este jogo.\n", possib);
 
+      Caixa *aux2=S;
+      printf("Sequencia definida: ");
+      while(aux2!=NULL){
+        printf("%s ",aux2->primeira->cor);
+        aux2=aux2->prox;
+      }
+      
       do{
         printf("Deseja exibir todas as permutações? (s/n) "); getchar();
         scanf("%c", &opt);
         if(opt == 's' || opt == 'S'){
           printf("\n");
-          permuta(S, aux->primeira);
+          permuta(S, S->primeira);
           break;
         }
         else if(opt == 'n' || opt == 'N') {
