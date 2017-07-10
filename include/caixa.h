@@ -16,7 +16,7 @@ struct cabeca {
 
 struct no {
   char letra;
-  String cor;
+  char *cor;
   Bola *prox;
 };
 
