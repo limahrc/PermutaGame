@@ -1,10 +1,12 @@
 #include "caixa.h"
+#include <string.h>
 #include <stdbool.h>
 
 Bola* novaBola(char cor[], char letra){
   Bola* nova = (Bola*) calloc(1, sizeof(Bola));
-  nova->cor = newString(cor);
-  nova->letra = letra; 
+  nova->cor = (char*) calloc(strlen(cor), sizeof(char));
+  nova->cor = cor;
+  nova->letra = letra;
   return nova;
 }
 
@@ -24,7 +26,7 @@ void insereNaCaixa(Caixa* caixa, Bola* bola){
   if(caixaVazia(caixa)) caixa->primeira = caixa->ultima = bola;
   else{
     caixa->ultima->prox = bola;
-    caixa->ultima = caixa->ultima->prox; //caixa->ultima->prox poderia ser modificada para bola 
+    caixa->ultima = caixa->ultima->prox; //caixa->ultima->prox poderia ser modificada para bola
   }
 }
 
@@ -37,7 +39,7 @@ void exibeCaixa(Caixa* caixa) {
       printf("\nCaixa C%i: contém as seguintes bolas:\n", i);
       Bola* aux = caux->primeira;
       while (aux!=NULL) {
-        print(aux->cor); printf(" %c\n", aux->letra);
+        printf("%s %c\n", aux->cor, aux->letra);
         aux = aux->prox;
       }
       caux = caux->prox;
@@ -49,7 +51,7 @@ void exibeCaixa(Caixa* caixa) {
 void imprimeCx(Caixa *caixa){
   Bola *aux=caixa->primeira;
   while(aux!=NULL){
-    print(aux->cor); printf(" %c ", aux->letra);
+    printf("%s %c ", aux->cor, aux->letra);
     aux=aux->prox;
   }
 }
@@ -67,7 +69,7 @@ Caixa *ligaCaixa(Caixa* primeira, Caixa* nova) {
     nova->ant = nova->prox = NULL;
     return nova;
   }else {
-    Caixa *ant = NULL; 
+    Caixa *ant = NULL;
     Caixa *aux = primeira;
     while (aux != NULL) {
       if (nova->bolas < aux->bolas) break;
