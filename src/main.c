@@ -7,7 +7,8 @@ int fatorial(int n);
 int main() {
 
   Caixa *S = NULL, *aux = NULL;
-  int i, j, possib=1, cxs, bol, cont=0;// cont variavel auxiliar caso toas as caixas sejam nulas
+  int i, j, possib=1, cxs, bol,
+  cont=0;// cont variavel auxiliar caso toas as caixas sejam nulas
   char ltr, opt, sair = 's', cor[20];
 
     do{
@@ -55,7 +56,7 @@ int main() {
             }
             else printf("\nOpção inválida. Tente novamente. ");
           } while(opt);
-        }// fim do if(cont >0)
+        }// fim do if(cont > 0)
       }// fim do if(cxs > 0)
       else printf("\nEsse número de caixas não é aceito.");
       while(sair != 'n' || sair != 'N' || sair != 's' || sair != 'S'){

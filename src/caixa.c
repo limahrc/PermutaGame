@@ -30,24 +30,6 @@ void insereNaCaixa(Caixa* caixa, Bola* bola){
   }
 }
 
-void exibeCaixa(Caixa* caixa) {
-  if(caixaVazia(caixa)) printf("Caixa vazia.\n");
-  else{
-    int i = 1;
-    Caixa* caux = caixa;
-    while(caux != NULL){
-      printf("\nCaixa C%i: contém as seguintes bolas:\n", i);
-      Bola* aux = caux->primeira;
-      while (aux!=NULL) {
-        printf("%s %c\n", aux->cor, aux->letra);
-        aux = aux->prox;
-      }
-      caux = caux->prox;
-      i++;
-    }
-  }
-}
-
 void imprimeCx(Caixa *caixa){
   Bola *aux=caixa->primeira;
   while(aux!=NULL){
@@ -64,25 +46,21 @@ void imprimeCxant(Caixa *caixa){
   }
 }
 
-Caixa *ligaCaixa(Caixa* primeira, Caixa* nova) {
-  if(primeira==NULL){
+Caixa* ligaCaixa(Caixa* primeira, Caixa* nova) {
+  if(primeira == NULL){
     nova->ant = nova->prox = NULL;
     return nova;
-  }else {
-    Caixa *ant = NULL;
+  } else {
     Caixa *aux = primeira;
-    while (aux != NULL) {
+    while (aux->prox != NULL) {
       if (nova->bolas < aux->bolas) break;
-      else{
-        ant=aux;
-        aux = aux->prox;
-      }
+      else aux = aux->prox;
     }
-    if(ant!=NULL) ant->prox=nova;
-    else primeira=nova;
-    nova->ant=ant;
-    nova->prox=aux;
-    if(aux!=NULL) aux->ant=nova;
+    if(aux->ant != NULL) aux->ant->prox=nova;
+    else primeira = nova;
+    nova->ant = aux->ant;
+    nova->prox = aux;
+    if(aux != NULL) aux->ant=nova;
 
     return primeira;
   }

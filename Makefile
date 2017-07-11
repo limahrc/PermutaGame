@@ -1,7 +1,7 @@
-APP 	= ./app
+APP 		= ./app
 INCLUDE = ./include
-OBJ 	= ./obj
-SRC 	= ./src
+OBJ 		= ./obj
+SRC 		= ./src
 
 all: app
 	echo ':: pronto para executar'
@@ -11,7 +11,7 @@ all: app
 	@echo ':: arquivo objeto gerado:' $@
 
 app: caixa.o main.o
-	gcc $(OBJ)/*.o ./lib/str.a -o $(APP)/exe
+	gcc $(OBJ)/*.o -o $(APP)/exe
 	echo ':: executável gerado'
 
 run:

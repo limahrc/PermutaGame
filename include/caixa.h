@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <str.h>
 
 typedef struct no Bola;
 typedef struct cabeca Caixa;
